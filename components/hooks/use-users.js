@@ -44,6 +44,7 @@ export const usePurchases = () => {
     const startOfWeek = new Date();
     startOfWeek.setDate(today.getDate() - offset);
 
+
     return purchases.filter((purchase) => {
       const purchaseDate = new Date(
         `${purchase.purchasedOn.month}-${purchase.purchasedOn.day}-${purchase.purchasedOn.year}`
@@ -51,8 +52,8 @@ export const usePurchases = () => {
 
       return (
         purchase.purchasedBy === currentUser &&
-        purchaseDate >= startOfWeek &&
-        purchaseDate <= today
+        ( ( purchaseDate >= startOfWeek &&
+        purchaseDate <= today ) || purchaseDate.getDate() === startOfWeek.getDate() )
       );
     });
   };
@@ -125,7 +126,7 @@ export const usePurchases = () => {
 
   const getSpecificWeekPurchase = (startingFullDate) => {
     let endOfWeek = new Date(startingFullDate.toDateString());
-    endOfWeek.setDate(startingFullDate.getDate() + 7);
+    endOfWeek.setDate(startingFullDate.getDate() + 6);
 
     return purchases.filter((purchase) => {
       const purchaseDate = new Date(

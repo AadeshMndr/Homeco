@@ -15,9 +15,12 @@ const ThisWeek = () => {
 
   let shopData = [];
   let colors = [];
+
+
   labels.forEach((day) => {
     let green = 255;
     let blue = 0;
+
 
     shopData.push(
       getThisWeeksPurchases().reduce((acc, purchase) => {
